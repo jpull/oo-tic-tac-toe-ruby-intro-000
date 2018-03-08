@@ -23,7 +23,7 @@ class TicTacToe
     user_input.to_i - 1
   end
   def position_taken?(index)
-    !(board[index].nil? || board[index] == " ")
+    !(@board[index].nil? || @board[index] == " ")
   end
   def play
     while !over?( && !draw?
