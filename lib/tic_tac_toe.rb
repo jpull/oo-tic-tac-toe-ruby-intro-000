@@ -26,7 +26,7 @@ class TicTacToe
     !(@board[index].nil? || @board[index] == " ")
   end
   def play
-    while !over?( && !draw?
+    while !over? && !draw?
       turn
     end
     if won?
