@@ -51,20 +51,20 @@ class TicTacToe
     input = gets.strip
     index = input_to_index(input)
 
-    if valid_move?(board, index)
-      move(board, index,current_player(board))
-      display_board(board)
+    if valid_move?index)
+      move(index,current_player
+      display_board
     else
       #puts "Invalid Move"
       turn(board)
     end
   end
 
-  def won?(board)
+  def won?
     WIN_COMBINATIONS.detect do |combo|
-      board[combo[0]] == board[combo[1]] &&
-      board[combo[1]] == board[combo[2]] &&
-      position_taken?(board, combo[0])
+      @board[combo[0]] == @board[combo[1]] &&
+      @board[combo[1]] == @board[combo[2]] &&
+      position_taken?combo[0])
     end
   end
 
@@ -82,7 +82,7 @@ class TicTacToe
 
   def winner
     if winning_combo = won?
-      board[winning_combo.first]
+      @board[winning_combo.first]
     end
   end
 end
