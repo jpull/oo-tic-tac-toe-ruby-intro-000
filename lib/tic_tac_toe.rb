@@ -68,7 +68,7 @@ class TicTacToe
     end
   end
 
-  def full?(board)
+  def full?
     @board.all?{|i| i == "X" || i == "O"}
   end
 
