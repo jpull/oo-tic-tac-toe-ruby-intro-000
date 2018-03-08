@@ -76,11 +76,11 @@ class TicTacToe
     full?(board) && !won?(board)
   end
 
-  def over?(board)
+  def over?
     won?(board) || full?(board)
   end
 
-  def winner(board)
+  def winner
     if winning_combo = won?(board)
       board[winning_combo.first]
     end
