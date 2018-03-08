@@ -22,7 +22,7 @@ class TicTacToe
   def input_to_index(user_input)
     user_input.to_i - 1
   end
-  def position_taken?(board, index)
+  def position_taken?(index)
     !(board[index].nil? || board[index] == " ")
   end
   def play(board)
