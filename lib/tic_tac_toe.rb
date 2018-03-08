@@ -25,9 +25,9 @@ class TicTacToe
   def position_taken?(index)
     !(board[index].nil? || board[index] == " ")
   end
-  def play(board)
-    while !over?(board) && !draw?(board)
-      turn(board)
+  def play
+    while !over?( && !draw?
+      turn
     end
     if won?
       puts "Congratulations #{winner}!"
@@ -69,19 +69,19 @@ class TicTacToe
   end
 
   def full?(board)
-    board.all?{|i| i == "X" || i == "O"}
+    @board.all?{|i| i == "X" || i == "O"}
   end
 
-  def draw?(board)
-    full?(board) && !won?(board)
+  def draw?
+    full? && !won?
   end
 
   def over?
-    won?(board) || full?(board)
+    won? || full?
   end
 
   def winner
-    if winning_combo = won?(board)
+    if winning_combo = won?
       board[winning_combo.first]
     end
   end
