@@ -22,7 +22,69 @@ class TicTacToe
   def input_to_index(user_input)
     user_input.to_i - 1
   end
+  def position_taken?(board, index)
+    !(board[index].nil? || board[index] == " ")
+  end
+  def play(board)
+    while !over?(board) && !draw?(board)
+      turn(board)
+    end
+    if won?(board)
+      puts "Congratulations #{winner(board)}!"
+    elsif draw?(board)
+      puts "Cat's Game!"
+    end
+  end
 
+  def move(board, index, current_player)
+    board[index] = current_player
+  end
+
+
+
+  def valid_move?(board, index)
+    index.between?(0,8) && !position_taken?(board, index)
+  end
+
+  def turn(board)
+    puts "Please enter 1-9:"
+    input = gets.strip
+    index = input_to_index(input)
+
+    if valid_move?(board, index)
+      move(board, index,current_player(board))
+      display_board(board)
+    else
+      #puts "Invalid Move"
+      turn(board)
+    end
+  end
+
+  def won?(board)
+    WIN_COMBINATIONS.detect do |combo|
+      board[combo[0]] == board[combo[1]] &&
+      board[combo[1]] == board[combo[2]] &&
+      position_taken?(board, combo[0])
+    end
+  end
+
+  def full?(board)
+    board.all?{|i| i == "X" || i == "O"}
+  end
+
+  def draw?(board)
+    full?(board) && !won?(board)
+  end
+
+  def over?(board)
+    won?(board) || full?(board)
+  end
+
+  def winner(board)
+    if winning_combo = won?(board)
+      board[winning_combo.first]
+    end
+  end
 end
 
 
@@ -36,66 +98,3 @@ WIN_COMBINATIONS = [
   [0,4,8],
   [2,4,6]
 ]
-
-def play(board)
-  while !over?(board) && !draw?(board)
-    turn(board)
-  end
-  if won?(board)
-    puts "Congratulations #{winner(board)}!"
-  elsif draw?(board)
-    puts "Cat's Game!"
-  end
-end
-
-def move(board, index, current_player)
-  board[index] = current_player
-end
-
-def position_taken?(board, index)
-  !(board[index].nil? || board[index] == " ")
-end
-
-def valid_move?(board, index)
-  index.between?(0,8) && !position_taken?(board, index)
-end
-
-def turn(board)
-  puts "Please enter 1-9:"
-  input = gets.strip
-  index = input_to_index(input)
-
-  if valid_move?(board, index)
-    move(board, index,current_player(board))
-    display_board(board)
-  else
-    #puts "Invalid Move"
-    turn(board)
-  end
-end
-
-def won?(board)
-  WIN_COMBINATIONS.detect do |combo|
-    board[combo[0]] == board[combo[1]] &&
-    board[combo[1]] == board[combo[2]] &&
-    position_taken?(board, combo[0])
-  end
-end
-
-def full?(board)
-  board.all?{|i| i == "X" || i == "O"}
-end
-
-def draw?(board)
-  full?(board) && !won?(board)
-end
-
-def over?(board)
-  won?(board) || full?(board)
-end
-
-def winner(board)
-  if winning_combo = won?(board)
-    board[winning_combo.first]
-  end
-end
